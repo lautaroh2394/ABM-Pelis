@@ -10,22 +10,23 @@ app.use(express.urlencoded({ extended: true}))
 
 const APP_PORT = 3000;
 
-const returnListado = function(req,res) { 
+app.use(express.static("public"))
+
+app.get('/listado', function(req,res) { 
   generateIndex().then(r=>{
     res.send(r)
   })
-}
+});
 
-app.get('/listado', returnListado);
-app.get('/', returnListado);
-
+app.get('/', function(req,res) { 
+  res.redirect("/listado");
+});
 
 app.post("/nueva", (req,res)=>{
-    mongoInterface.insertar(req.body.nombre).then(mongoRes=>{
-        generateIndex().then(indexPage=>{
-            res.send(indexPage)
-          })
-    })
+  console.log(req.body)
+  mongoInterface.insertar(req.body.nombre).then(mongoRes=>{
+      res.redirect("/listado")
+  })
 })
 
 app.get("/nueva", (req,res)=>{

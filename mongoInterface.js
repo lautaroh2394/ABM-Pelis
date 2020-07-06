@@ -10,7 +10,7 @@ const connect = () => {
         if (!!CLIENT) res(CLIENT);
         CLIENT = await MongoClient.connect(url,{ useUnifiedTopology: true });
         let existingCollections = await CLIENT.db(DB).listCollections().toArray()
-        if (!existingCollections.any(c=>c.name == COLLECTION)){
+        if (!existingCollections.some(c=>c.name == COLLECTION)){
             await CLIENT.db(DB).createCollection(COLLECTION)
         }
         res(CLIENT);
