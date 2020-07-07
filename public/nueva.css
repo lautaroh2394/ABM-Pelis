@@ -157,4 +157,38 @@
       max-width: 1200px;
   }
   
+  .input-container-90{
+    width: 90%;
+  }
+
+  .input-container-10{
+    width: 10%;
+    height: inherit;
+  }
   
+  .input100-contained {
+    background: transparent;
+    font-family: Montserrat-SemiBold;
+    font-size: 18px;
+    color: #555555;
+    line-height: 1.2;
+    padding-right: 15px;
+  }
+
+  .btn-container{
+    align-content: center;
+    display: grid;
+    margin-bottom: 20px;
+  }
+
+  .btn-contained{
+    width: 100%;
+    background-color: #333333;
+    border-radius: 25px;
+    font-family: Montserrat-Medium;
+    font-size: 10px;
+    color: #fff;
+    line-height: 1.2;
+    padding: 10px 05px 10px 05px;
+    height: 100%;
+  }
