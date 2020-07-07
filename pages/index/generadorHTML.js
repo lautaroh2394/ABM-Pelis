@@ -1,33 +1,46 @@
 const index = require("./listado");
 const mongoInterface = require("../../mongoInterface").mongoInterface
 
-const htmlizeNonStringValue = (value) =>{
-    if (Array.isArray(value)){
-        return htmlizeNonStringValue(
-            {
-                ul: value.map(v=>{
-                    return htmlizeValue("li",JSON.stringify(v))
-                }).join("")
-            }
-        ) 
-    }
-    if (typeof(value) == "object"){
-        return htmlizeNonStringValue(Object.keys(value).reduce((prev,curr)=>prev+htmlizeValue(curr, value[curr]),""))
-    }
-    return value
+const generarItem = (nombre,id)=>{
+    return `<form class="contact100-form" action="/delete" method="post">
+    <div class="input-container-90">
+        <div class="wrap-input100 bg1">
+            <input type="text" name="nombre" disabled class="input100-contained" value="${nombre}">
+            <input type="hidden" name="id" value="${id}">
+        </div>
+    </div>
+    <div class="input-container-10 btn-container">
+        <button class="btn-contained">Delete</button>
+    </div>
+</form>`
 }
 
-const htmlizeValue = (key,value)=>{
-    let v = (typeof(value) == "string") ? value : htmlizeNonStringValue(value)
-    return `<${key}>${v}</${key}>`
+const topHtml = `<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Contact V5</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">	
+	<link rel="stylesheet" type="text/css" href="nueva.css">
+</head>
+<body>
+	<div class="container-contact100">
+        <div class="wrap-contact100">
+        `
+
+const bottomHtml = `
+</div>
+    </div>
+</body>
+</html>
+`
+
+const generarListadoHTML = ()=>{
+    return new Promise(res=>{
+        mongoInterface.listadoPeliculas().then(peliculas=>{
+            res(topHtml + peliculas.map(e=>generarItem(e.nombre,e._id.toString())).join("\n") + bottomHtml)
+        })
+    })
 }
 
-const generateIndex = async ()=>{
-    let html = "<!DOCTYPE html>"
-    let listado = await (mongoInterface.listadoPeliculas())
-    index.html.body = listado
-    html += htmlizeNonStringValue(index)
-    return html
-}
-
-module.exports.generateIndex = generateIndex
+module.exports.generateIndex = generarListadoHTML

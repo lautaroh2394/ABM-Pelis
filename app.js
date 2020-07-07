@@ -33,6 +33,10 @@ app.get("/nueva", (req,res)=>{
     res.sendFile(path.join(__dirname,"/pages/nueva/nueva.html"));
 })
 
+app.post("/eliminar", (req,res)=>{
+  //TODO
+})
+
 app.listen(APP_PORT, ()=>{
   console.log("listening..")
 });
