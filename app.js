@@ -33,12 +33,18 @@ app.post("/nueva", (req,res)=>{
   })
 })
 
+app.post("/modificar",(req,res)=>{
+  if (req.body.btn_name == "eliminar") res.redirect("/eliminar")
+  console.log("Modificar", req.body);
+  res.sendFile(path.join(__dirname,"/pages/modificar/modificar.html"))
+  // TODO
+})
+
 app.post("/eliminar", (req,res)=>{
   console.log("Eliminar", req.body);
   mongoInterface.eliminar(req.body.id).then(r=>{
     res.redirect("/listado");
   })
-
 })
 
 app.listen(APP_PORT, ()=>{
