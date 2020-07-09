@@ -43,8 +43,17 @@ const eliminar = (id) =>{
     })
 }
 
+const editar = (id, edit) =>{
+    return connect().then(client=>{
+        client.db(DB).collection(COLLECTION).updateOne(
+            {"_id":ObjectId(id)},
+            {$set:edit}
+        )}
+    )
+}
+
 const close = ()=>{
     connect().then(client=>client.close())
 }
 
-module.exports = {listadoPeliculas, listadoPeliculasProm, close, insertar, eliminar}
+module.exports = {listadoPeliculas, listadoPeliculasProm, close, insertar, eliminar, editar}

@@ -35,9 +35,13 @@ app.post("/nueva", (req,res)=>{
 
 app.post("/modificar",(req,res)=>{
   if (req.body.btn_name == "eliminar") res.redirect("/eliminar")
+
   console.log("Modificar", req.body);
+  if (req.btn_name == "actualizar"){
+    //TODO - UPDATE A LA MONGO  
+  }
   res.sendFile(path.join(__dirname,"/pages/modificar/modificar.html"))
-  // TODO
+    // TODO - MOSTRAR PÁGINA DE EDICION
 })
 
 app.post("/eliminar", (req,res)=>{
