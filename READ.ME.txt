@@ -1,0 +1,7 @@
+Sistema de registro de películas. Mi objetivo es puramente didáctico; aprender y entender node y express.
+
+Como usar:
+
+- Instalar mongo: https://docs.mongodb.com/manual/installation/#mongodb-community-edition-installation-tutorials
+- Para iniciar el servidor ejecutar en la raiz de la carpeta node app.js
+- Ingresar a localhost:3000
