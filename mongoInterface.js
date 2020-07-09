@@ -1,4 +1,4 @@
-const MongoClient = require('mongodb').MongoClient;
+const {MongoClient, ObjectId } = require('mongodb');
 const MONGO_PORT = 127017;
 const url = `mongodb://localhost:${27017}`;
 const DB = "PeliSys"
@@ -37,8 +37,14 @@ const insertar = (nombre) =>{
     })
 }
 
+const eliminar = (id) =>{
+    return connect().then(client=>{
+        client.db(DB).collection(COLLECTION).deleteOne({"_id":ObjectId(id)})
+    })
+}
+
 const close = ()=>{
     connect().then(client=>client.close())
 }
 
-module.exports.mongoInterface = {listadoPeliculas, listadoPeliculasProm, close, insertar}
+module.exports = {listadoPeliculas, listadoPeliculasProm, close, insertar, eliminar}

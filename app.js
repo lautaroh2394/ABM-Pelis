@@ -1,7 +1,7 @@
 const express = require("express");
 const path = require("path");
 const fs = require('fs');
-const mongoInterface = require("./mongoInterface").mongoInterface
+const mongoInterface = require("./mongoInterface")
 const generateIndex = require("./pages/index/generadorHTML.js").generateIndex
 
 const app = express();
@@ -22,19 +22,23 @@ app.get('/', function(req,res) {
   res.redirect("/listado");
 });
 
+app.get("/nueva", (req,res)=>{
+    res.sendFile(path.join(__dirname,"/pages/nueva/nueva.html"));
+})
+
 app.post("/nueva", (req,res)=>{
-  console.log(req.body)
+  console.log("Nueva", req.body)
   mongoInterface.insertar(req.body.nombre).then(mongoRes=>{
       res.redirect("/listado")
   })
 })
 
-app.get("/nueva", (req,res)=>{
-    res.sendFile(path.join(__dirname,"/pages/nueva/nueva.html"));
-})
-
 app.post("/eliminar", (req,res)=>{
-  //TODO
+  console.log("Eliminar", req.body);
+  mongoInterface.eliminar(req.body.id).then(r=>{
+    res.redirect("/listado");
+  })
+
 })
 
 app.listen(APP_PORT, ()=>{

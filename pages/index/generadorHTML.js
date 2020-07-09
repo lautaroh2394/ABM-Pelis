@@ -1,8 +1,8 @@
 const index = require("./listado");
-const mongoInterface = require("../../mongoInterface").mongoInterface
+const mongoInterface = require("../../mongoInterface")
 
 const generarItem = (nombre,id)=>{
-    return `<form class="contact100-form" action="/delete" method="post">
+    return `<form class="contact100-form" action="/eliminar" method="post">
     <div class="input-container-90">
         <div class="wrap-input100 bg1">
             <input type="text" name="nombre" disabled class="input100-contained" value="${nombre}">
@@ -16,9 +16,9 @@ const generarItem = (nombre,id)=>{
 }
 
 const topHtml = `<!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-	<title>Contact V5</title>
+	<title>Pelis</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">	
 	<link rel="stylesheet" type="text/css" href="nueva.css">

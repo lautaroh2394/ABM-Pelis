@@ -159,11 +159,13 @@
   
   .input-container-90{
     width: 90%;
+    z-index: 0;
   }
 
   .input-container-10{
     width: 10%;
     height: inherit;
+    z-index: 1;
   }
   
   .input100-contained {
