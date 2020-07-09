@@ -1,4 +1,3 @@
-const index = require("./listado");
 const mongoInterface = require("../../mongoInterface")
 
 const generarItem = (nombre,id)=>{
