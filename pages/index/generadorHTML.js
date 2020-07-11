@@ -23,7 +23,7 @@ const topHtml = `<!DOCTYPE html>
 	<title>Pelis</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">	
-	<link rel="stylesheet" type="text/css" href="nueva.css">
+	<link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
 	<div class="container-contact100">
