@@ -1,15 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Editar película</title>
+	<title>Nueva película</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="styles.css">
+	<link rel="stylesheet" type="text/css" href="../../styles.css">
 </head>
 <body>
 	<div class="container-contact100">
 		<div class="wrap-contact100">
-			<p>EN DESARROLLO</p>
+			<form action="/modificar" method="post">
+				<div class="wrap-input100">
+					<span class="label-input100">Nombre</span>
+					<input type="text"class="input100" name="nombre" placeholder="nombre de pelicula" value="$nombre-value">
+					<input type="text" name="id" hidden value="$id-value">
+				</div>
+
+				<div class="container-contact100-form-btn">
+					<button name="btn_name" value="actualizar" class="contact100-form-btn">Editar</button>
+				</div>
+			</form>
 		</div>
 	</div>
 </body>

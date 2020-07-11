@@ -14,7 +14,7 @@ const connect = () => {
             await CLIENT.db(DB).createCollection(COLLECTION)
         }
         res(CLIENT);
-    })
+    }).catch(e=>console.log("Error - connect", e))
 }
 
 const listadoPeliculas = async function() {
@@ -52,8 +52,16 @@ const editar = (id, edit) =>{
     )
 }
 
+const getPelicula = id => {
+    return new Promise(res=>{
+        connect().then(client => 
+            client.db(DB).collection(COLLECTION).findOne({"_id":ObjectId(id)})
+            .then(query => res(query))
+    )})
+}
+
 const close = ()=>{
     connect().then(client=>client.close())
 }
 
-module.exports = {listadoPeliculas, listadoPeliculasProm, close, insertar, eliminar, editar}
+module.exports = {listadoPeliculas, listadoPeliculasProm, close, insertar, eliminar, editar, getPelicula}

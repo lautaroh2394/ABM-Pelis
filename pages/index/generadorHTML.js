@@ -49,7 +49,7 @@ const generarListadoHTML = ()=>{
         mongoInterface.listadoPeliculas().then(peliculas=>{
             res(topHtml + peliculas.map(e=>generarItem(e.nombre,e._id.toString())).join("\n") + bottomHtml)
         })
-    })
+    }).catch(e=>console.log("Error - generarListadoHTML", e))
 }
 
 module.exports.generateIndex = generarListadoHTML

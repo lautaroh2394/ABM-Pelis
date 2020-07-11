@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const path = require("path");
+const fs = require('fs'); 
 const mongoInterface = require("./mongoInterface")
 const generateIndex = require("./pages/index/generadorHTML.js").generateIndex
 
@@ -30,12 +31,25 @@ router.post("/nueva", (req,res)=>{
 router.post("/modificar",(req,res)=>{
     if (req.body.btn_name == "eliminar") res.redirect("/eliminar")
 
-    console.log("Modificar", req.body);
-    if (req.btn_name == "actualizar"){
-        //TODO - UPDATE A LA MONGO  
+    if (req.body.btn_name == "actualizar"){
+        console.log("Actualizar en bd", req.body);
+        mongoInterface.editar(req.body.id,{nombre: req.body.nombre}).then(r=>{
+            res.redirect("/")
+        })
     }
-    res.sendFile(path.join(__dirname,"/pages/modificar/modificar.html"))
-        // TODO - MOSTRAR PÁGINA DE EDICION
+
+    if (req.body.btn_name == "editar"){
+        console.log("Editar en web", req.body);
+        mongoInterface.getPelicula(req.body.id).then(pelicula=>{
+            fs.readFile(path.join(__dirname,"/pages/modificar/modificar.html"), (err, file) => {
+                res.send(file
+                    .toString()
+                    .replace(/\$nombre\-value/g, pelicula.nombre)
+                    .replace(/\$id\-value/g, pelicula._id)
+                )
+            })
+        }).catch(e=>console.log("Error - post modificar", e))
+    }
 })
 
 router.post("/eliminar", (req,res)=>{
